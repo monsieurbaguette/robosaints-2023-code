@@ -57,7 +57,7 @@ motor_L_follow.Follow(motor_L_main);
     
 }
 void DrivetrainModular::InitDefaultCommand() {
-    SetDefaultCommand(new Drive::Drive())
+    SetDefaultCommand(new Drive())
     
 }
 void DrivetrainModular::Periodic() {
