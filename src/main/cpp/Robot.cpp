@@ -11,17 +11,24 @@
 // ROBOTBUILDER TYPE: Robot.
 
 #include "Robot.h"
-
+#include <cameraserver/CameraServer.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/CommandScheduler.h>
-OI* Robot::controlInterface = 0;
-DrivetrainModular* Robot::drivetrain = 0;
+#include <commands/Drive.h>
+#include <subsystems/PneumaticsModular.h>
 void Robot::RobotInit() {
-
-    controlInterface = new OI();
-    drivetrain = new DrivetrainModular();
+ controlInterface = new OI(); // USE SMART POINTERS HERE LATER! DO THIS AT SOME POINT IN ORDER TO STOP MEMORY LEAKS! (sure, one memory leak is better than 10, but it would be better to have 0! ) (shared_ptr?)
+ drivetrain.SetDefaultCommand(Drive(
+      &drivetrain, [this] { return controlInterface->getDriveStick(); })); // [this] is lambda notation, it essentially allows defining/running a function wihout defining/running it explicitly. the this keyword makes sure that the function is treated like it is a member function of robot, so we can use the same scopes/variables.
+      //remember, we are trying to minimize/eliminate use of the new keyword! instead of drivetrain= new drivetrain() we just do &drivetrain, referencing the subsystem directly
+  frc::CameraServer::StartAutomaticCapture(0);
+  frc::CameraServer::StartAutomaticCapture(1);
 }
+void Robot::SimulationInit() {
 
+    //controlInterface = new OI();
+    //drivetrain = new DrivetrainModular();
+}
 /**
  * This function is called every robot packet, no matter the mode. Use
  * this for items like diagnostics that you want to run during disabled,
@@ -30,8 +37,14 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
+void Robot::RobotPeriodic() { 
 
+  frc2::CommandScheduler::GetInstance().Run(); 
+  
+  }
+void Robot::SimulationPeriodic() { 
+  //frc2::CommandScheduler::GetInstance().Run(); 
+  }
 /**
  * This function is called once each time the robot enters Disabled mode. You
  * can use it to reset any subsystem information you want to clear when the

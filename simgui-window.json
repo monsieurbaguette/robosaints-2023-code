@@ -1,44 +1,92 @@
 {
   "MainWindow": {
     "GLOBAL": {
-      "height": "900",
-      "maximized": "0",
+      "height": "991",
+      "maximized": "1",
       "style": "0",
       "userScale": "2",
-      "width": "1600",
-      "xpos": "-1",
-      "ypos": "-1"
+      "width": "1920",
+      "xpos": "0",
+      "ypos": "29"
+    }
+  },
+  "Table": {
+    "0xE56EC1C2,4": {
+      "Column 0  Weight": "1.0000",
+      "Column 1  Weight": "1.0000",
+      "Column 2  Weight": "1.0000",
+      "Column 3  Weight": "1.0000"
     }
   },
   "Window": {
+    "###/LiveWindow/Ungrouped/Scheduler": {
+      "Collapsed": "0",
+      "Pos": "411,93",
+      "Size": "400,200"
+    },
     "###FMS": {
       "Collapsed": "0",
-      "Pos": "6,675",
+      "Pos": "29,631",
       "Size": "336,164"
     },
     "###Joysticks": {
       "Collapsed": "0",
-      "Pos": "292,579",
-      "Size": "976,179"
+      "Pos": "1119,740",
+      "Size": "976,199"
+    },
+    "###Keyboard 0 Settings": {
+      "Collapsed": "0",
+      "Pos": "10,50",
+      "Size": "300,560"
+    },
+    "###Keyboard 1 Settings": {
+      "Collapsed": "0",
+      "Pos": "477,41",
+      "Size": "300,560"
+    },
+    "###Keyboard 2 Settings": {
+      "Collapsed": "0",
+      "Pos": "630,50",
+      "Size": "300,560"
     },
     "###NetworkTables": {
       "Collapsed": "0",
-      "Pos": "312,346",
+      "Pos": "1398,546",
       "Size": "937,231"
+    },
+    "###NetworkTables Info": {
+      "Collapsed": "0",
+      "Pos": "413,404",
+      "Size": "750,145"
     },
     "###Other Devices": {
       "Collapsed": "0",
-      "Pos": "1281,25",
+      "Pos": "959,-6",
       "Size": "312,868"
+    },
+    "###Plot <0>": {
+      "Collapsed": "0",
+      "Pos": "60,60",
+      "Size": "700,400"
+    },
+    "###RoboRIO": {
+      "Collapsed": "0",
+      "Pos": "5,125",
+      "Size": "233,216"
+    },
+    "###Solenoids": {
+      "Collapsed": "0",
+      "Pos": "275,40",
+      "Size": "201,294"
     },
     "###System Joysticks": {
       "Collapsed": "0",
-      "Pos": "6,437",
+      "Pos": "43,371",
       "Size": "232,254"
     },
     "###Timing": {
       "Collapsed": "0",
-      "Pos": "6,187",
+      "Pos": "575,691",
       "Size": "162,168"
     },
     "Debug##Default": {

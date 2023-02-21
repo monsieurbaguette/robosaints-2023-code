@@ -19,10 +19,11 @@
 
 class Robot : public frc::TimedRobot {
  public:
-   static OI* controlInterface;
-  static DrivetrainModular* drivetrain;
+ 
   void RobotInit() override;
   void RobotPeriodic() override;
+   void SimulationInit() override;
+  void SimulationPeriodic() override;
   void DisabledInit() override;
   void DisabledPeriodic() override;
   void AutonomousInit() override;
@@ -31,7 +32,9 @@ class Robot : public frc::TimedRobot {
   void TeleopPeriodic() override;
   void TestPeriodic() override;
 
- private:
+ private:  
+   OI* controlInterface;
+   DrivetrainModular drivetrain;
   // Have it null by default so that if testing teleop it
   // doesn't have undefined behavior and potentially crash.
   frc2::Command* m_autonomousCommand = nullptr;
