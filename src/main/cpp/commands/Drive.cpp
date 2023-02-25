@@ -53,7 +53,12 @@ Drive::Drive(DrivetrainModular* driveSubsystem,
         the same thing is done with the joystick (because it also needs to be declared as a part of the robot class). Std::move used instead of new.
         These can then be used as normal in the command's main code.
 
-
+        Feb. 21, 2023 
+       ---------------------------------------------------------------------------------------------------------
+        uh yeah lots of stuff happened and the code had to be last minuted so memory leaks 
+        will have to be tolerated for now. not the biggest deal, there arent as many
+        so the ram wont skyrocket fast enough to cause any issues (just dont run the bot for 10 hours straight)
+       ---------------------------------------------------------------------------------------------------------
 
 
 

@@ -55,6 +55,12 @@ void PneumaticsModular::ValveOpen(int solId) {
      //sol is shorthand for solenoid valve (its a double solenoid so there are two channels of air movement, forward and reverse)
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // i love exclaimation points!!!!!
+    } if( solId ==2 ){
+                frc::Solenoid* gwenStefani =  &Solenoid1;
+        gwenStefani->Set(true);
+
+
+        //armIsExtend = true;
     }
 }
 
@@ -70,11 +76,11 @@ void PneumaticsModular::ValveClose(int solId) {
     // i love exclaimation points!!!!!
     }
     if (solId==2) {
-                frc::DoubleSolenoid* gwenStefani =  &Solenoid;
-        gwenStefani->Set(frc::DoubleSolenoid::kReverse);
+                frc::Solenoid* gwenStefani =  &Solenoid1;
+        gwenStefani->Set(false);
 
 
-        armIsExtend = false;
+       // armIsExtend = false;
     }
 }
 void PneumaticsModular::ValveCloseAll(int solId) {
