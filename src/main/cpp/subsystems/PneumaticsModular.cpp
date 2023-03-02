@@ -56,8 +56,8 @@ void PneumaticsModular::ValveOpen(int solId) {
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // i love exclaimation points!!!!!
     } if( solId ==2 ){
-                frc::Solenoid* gwenStefani =  &Solenoid1;
-        gwenStefani->Set(true);
+                frc::DoubleSolenoid* gwenStefani =  &Solenoid1;
+        gwenStefani->Set(frc::DoubleSolenoid::kForward);
 
 
         //armIsExtend = true;
@@ -76,8 +76,8 @@ void PneumaticsModular::ValveClose(int solId) {
     // i love exclaimation points!!!!!
     }
     if (solId==2) {
-                frc::Solenoid* gwenStefani =  &Solenoid1;
-        gwenStefani->Set(false);
+                frc::DoubleSolenoid* gwenStefani =  &Solenoid1;
+        gwenStefani->Set(frc::DoubleSolenoid::kReverse);
 
 
        // armIsExtend = false;

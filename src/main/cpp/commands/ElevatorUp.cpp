@@ -36,7 +36,7 @@ void ElevatorUp::Execute() {
 /*if (arm) {
     if(systemStick->GetMagnitude() >0.1) {
 m_elevator->ElevatorManual(systemStick->GetY());
-telescopearm->ValveClose(1); //telescopearm -> ValveReleaseHalfLifeThree("soon please")
+telescopearm->ValveClose(1); //telescopearm -> ValveReleaseHalfLifeThree("soon please");
     } 
 } else {*/
     m_elevator->ElevatorManual(0.35); // sets elevator speed as a decimal (out of 1)
