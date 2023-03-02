@@ -81,6 +81,7 @@ void Drive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Drive::Execute() {
+//double maxSpeed = ((joystick()->GetRawAxis(3)*-1)+1)*0.5;
 drivetrainmodular->StandardDrive(joystick());
 
 }

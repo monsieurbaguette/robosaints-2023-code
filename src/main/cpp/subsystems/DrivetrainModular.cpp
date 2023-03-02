@@ -86,7 +86,7 @@ void DrivetrainModular::StandardDrive(frc::Joystick* driveStick) {
         //double maxSpeed = 1.0;
   //  frc::SmartDashboard::PutNumber("MaxSpeed", (((driveStick->GetRawAxis(3)*-1)+1)*0.5));
     DifferentialDrive->SetMaxOutput(maxSpeed/*((driveStick->GetRawAxis(3)*-1)+1)*0.5*/);
-    DifferentialDrive->ArcadeDrive(driveStick->GetX(), driveStick->GetY(), false);
+    DifferentialDrive->ArcadeDrive(driveStick->GetX()*maxSpeed, driveStick->GetY()*maxSpeed, false);
     
     //std::cout << "vrroom vroom im drivin my mahms cah: " <<  << "\n";
     frc::SmartDashboard::PutNumber("drivetrain right motors", motor_R_main.Get());
