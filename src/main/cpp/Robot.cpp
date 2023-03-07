@@ -16,6 +16,7 @@
 #include <frc2/command/CommandScheduler.h>
 #include <commands/Drive.h>
 #include <subsystems/PneumaticsModular.h>
+#include <OI.h>
 void Robot::RobotInit() {
  controlInterface = new OI(); // USE SMART POINTERS HERE LATER! DO THIS AT SOME POINT IN ORDER TO STOP MEMORY LEAKS! (sure, one memory leak is better than 10, but it would be better to have 0! ) (shared_ptr?)
  drivetrain.SetDefaultCommand(Drive(
@@ -23,6 +24,7 @@ void Robot::RobotInit() {
       //remember, we are trying to minimize/eliminate use of the new keyword! instead of drivetrain= new drivetrain() we just do &drivetrain, referencing the subsystem directly
   frc::CameraServer::StartAutomaticCapture(0);
   frc::CameraServer::StartAutomaticCapture(1);
+  
 }
 void Robot::SimulationInit() {
 
@@ -39,7 +41,7 @@ void Robot::SimulationInit() {
  */
 void Robot::RobotPeriodic() { 
 
-  frc2::CommandScheduler::GetInstance().Run(); 
+  frc2::CommandScheduler::GetInstance().Run();
   
   }
 void Robot::SimulationPeriodic() { 

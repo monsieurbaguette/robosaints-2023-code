@@ -41,7 +41,7 @@ telescopearm->ValveOpen(1);
         }
     } else {*/
         
-        m_elevator->ElevatorManual(-.35); // sets elevator speed as a decimal (out of 1)
+        m_elevator->ElevatorManual(-.5); // sets elevator speed as a decimal (out of 1)
         
   //  }
 

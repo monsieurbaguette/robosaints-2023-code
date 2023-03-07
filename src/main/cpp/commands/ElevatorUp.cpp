@@ -39,7 +39,7 @@ m_elevator->ElevatorManual(systemStick->GetY());
 telescopearm->ValveClose(1); //telescopearm -> ValveReleaseHalfLifeThree("soon please");
     } 
 } else {*/
-    m_elevator->ElevatorManual(0.35); // sets elevator speed as a decimal (out of 1)
+    m_elevator->ElevatorManual(0.5); // sets elevator speed as a decimal (out of 1)
 //}
 
 }
@@ -52,6 +52,7 @@ bool ElevatorUp::IsFinished() {
 // Called once after isFinished returns true
 void ElevatorUp::End(bool interrupted) {
 m_elevator->ElevatorStop();
+telescopearm -> ValveCloseAll(1);
 }
 
 bool ElevatorUp::RunsWhenDisabled() const {
