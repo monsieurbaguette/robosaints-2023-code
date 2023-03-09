@@ -13,13 +13,15 @@
 
 #include <frc/TimedRobot.h>
 #include <frc2/command/Command.h>
-
+#include <photonlib/PhotonCamera.h>
+#include <frc/controller/PIDController.h>
 #include "OI.h"
 #include "subsystems/DrivetrainModular.h"
 
 class Robot : public frc::TimedRobot {
  public:
- 
+ photonlib::PhotonCamera camera{"photonvision"};
+ frc2::PIDController controller{.1, 0, 0};
   void RobotInit() override;
   void RobotPeriodic() override;
    void SimulationInit() override;

@@ -21,7 +21,7 @@
   "Window": {
     "###/LiveWindow/Ungrouped/Scheduler": {
       "Collapsed": "0",
-      "Pos": "411,93",
+      "Pos": "231,830",
       "Size": "400,200"
     },
     "###FMS": {
@@ -31,8 +31,8 @@
     },
     "###Joysticks": {
       "Collapsed": "0",
-      "Pos": "1119,740",
-      "Size": "976,199"
+      "Pos": "993,732",
+      "Size": "976,212"
     },
     "###Keyboard 0 Settings": {
       "Collapsed": "0",
@@ -51,12 +51,12 @@
     },
     "###NetworkTables": {
       "Collapsed": "0",
-      "Pos": "1398,546",
+      "Pos": "1085,491",
       "Size": "937,231"
     },
     "###NetworkTables Info": {
       "Collapsed": "0",
-      "Pos": "413,404",
+      "Pos": "341,435",
       "Size": "750,145"
     },
     "###Other Devices": {
@@ -76,8 +76,8 @@
     },
     "###Solenoids": {
       "Collapsed": "0",
-      "Pos": "275,40",
-      "Size": "201,294"
+      "Pos": "147,62",
+      "Size": "201,268"
     },
     "###System Joysticks": {
       "Collapsed": "0",

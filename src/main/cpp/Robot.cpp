@@ -17,6 +17,8 @@
 #include <commands/Drive.h>
 #include <subsystems/PneumaticsModular.h>
 #include <OI.h>
+#include <photonlib/PhotonPipelineResult.h>
+#include <subsystems/DrivetrainModular.h>
 void Robot::RobotInit() {
  controlInterface = new OI(); // USE SMART POINTERS HERE LATER! DO THIS AT SOME POINT IN ORDER TO STOP MEMORY LEAKS! (sure, one memory leak is better than 10, but it would be better to have 0! ) (shared_ptr?)
  drivetrain.SetDefaultCommand(Drive(
@@ -24,6 +26,7 @@ void Robot::RobotInit() {
       //remember, we are trying to minimize/eliminate use of the new keyword! instead of drivetrain= new drivetrain() we just do &drivetrain, referencing the subsystem directly
   frc::CameraServer::StartAutomaticCapture(0);
   frc::CameraServer::StartAutomaticCapture(1);
+  photonlib::PhotonPipelineResult result = camera.GetLatestResult();
   
 }
 void Robot::SimulationInit() {
@@ -62,10 +65,22 @@ void Robot::DisabledPeriodic() {}
  */
 void Robot::AutonomousInit() {
   
-
+ 
 }
 
-void Robot::AutonomousPeriodic() {}
+void Robot::AutonomousPeriodic() 
+{
+  photonlib::PhotonPipelineResult result = camera.GetLatestResult();
+   double rotationSpeed;
+   if (result.HasTargets()) {
+      // Rotation speed is the output of the PID controller
+      rotationSpeed = -controller.Calculate(result.GetBestTarget().GetYaw(), 0);
+    } else {
+      // If we have no targets, stay still.
+      rotationSpeed = 0;
+    }
+    drivetrain.DriveDistance(0.0,rotationSpeed);
+}
 
 void Robot::TeleopInit() {
   // This makes sure that the autonomous stops running when
@@ -76,6 +91,7 @@ void Robot::TeleopInit() {
     m_autonomousCommand->Cancel();
     m_autonomousCommand = nullptr;
   }
+  camera.SetDriverMode(true);
 }
 
 /**
