@@ -15,22 +15,46 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/CommandScheduler.h>
 #include <commands/Drive.h>
-#include <subsystems/PneumaticsModular.h>
+#include <subsystems/PneumaticsArm.h>
+#include <subsystems/PneumaticsExtender.h>
+#include <subsystems/PneumaticsGrabber.h>
 #include <OI.h>
 #include <photonlib/PhotonPipelineResult.h>
 #include <subsystems/DrivetrainModular.h>
+#include <photonlib/PhotonUtils.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/DriverStation.h>
+#include <frc2/command/Command.h> `
+
+int iteration;
 void Robot::RobotInit() {
+
+  frc::SmartDashboard::PutNumber("taxi", 0);
+  frc::SmartDashboard::PutNumber("AUTO GOAL #", 1);
  controlInterface = new OI(); // USE SMART POINTERS HERE LATER! DO THIS AT SOME POINT IN ORDER TO STOP MEMORY LEAKS! (sure, one memory leak is better than 10, but it would be better to have 0! ) (shared_ptr?)
  drivetrain.SetDefaultCommand(Drive(
       &drivetrain, [this] { return controlInterface->getDriveStick(); })); // [this] is lambda notation, it essentially allows defining/running a function wihout defining/running it explicitly. the this keyword makes sure that the function is treated like it is a member function of robot, so we can use the same scopes/variables.
       //remember, we are trying to minimize/eliminate use of the new keyword! instead of drivetrain= new drivetrain() we just do &drivetrain, referencing the subsystem directly
-  frc::CameraServer::StartAutomaticCapture(0);
-  frc::CameraServer::StartAutomaticCapture(1);
-  photonlib::PhotonPipelineResult result = camera.GetLatestResult();
+ // frc::CameraServer::StartAutomaticCapture(0);
+ // frc::CameraServer::StartAutomaticCapture(1);
   
+  nt::NetworkTableInstance inst = nt::NetworkTableInstance::GetDefault();
+inst.StartServer();
+inst.StartClient4("example client");
+
+// connect to a roboRIO with team number TEAM
+inst.SetServerTeam(1307);
+
+// starting a DS client will try to get the roboRIO address from the DS application
+inst.StartDSClient();
+
+// connect to a specific host/port
+inst.SetServer("host", NT_DEFAULT_PORT4);
+
+
 }
 void Robot::SimulationInit() {
-
+frc::SmartDashboard::PutBoolean("taxi", false);
     //controlInterface = new OI();
     //drivetrain = new DrivetrainModular();
 }
@@ -65,22 +89,88 @@ void Robot::DisabledPeriodic() {}
  */
 void Robot::AutonomousInit() {
   
- 
+ iteration = 0;
 }
 
 void Robot::AutonomousPeriodic() 
 {
-  photonlib::PhotonPipelineResult result = camera.GetLatestResult();
+
+  
+  bool taxi = frc::SmartDashboard::GetNumber("taxi", 0);
+  int goal = frc::SmartDashboard::GetNumber("AUTO GOAL #", 1);
+  if (taxi == 0 || taxi == 0.0){
+    iteration +=1;
+    if (iteration <= 50) {
+        drivetrain.DriveDistance(-1, 0);
+    }
+        if (iteration >= 50) {
+        drivetrain.DriveDistance(0, 0);
+    }
+            if (iteration >= 100) {
+        drivetrain.DriveDistance(0, 0);
+    }
+  } else {
+  iteration += 1;
+  if (iteration >=0) {
+   photonlib::PhotonPipelineResult results = camera.GetLatestResult();
+  
    double rotationSpeed;
-   if (result.HasTargets()) {
+   if (results.HasTargets()) {
       // Rotation speed is the output of the PID controller
-      rotationSpeed = -controller.Calculate(result.GetBestTarget().GetYaw(), 0);
-    } else {
+
+
+      for(photonlib::PhotonTrackedTarget resultLoop : results.GetTargets()){
+        if (frc::DriverStation::GetAlliance() == frc::DriverStation::kBlue) {
+
+        
+        if (resultLoop.GetFiducialId() == goal + 5) {
+                rotationSpeed = -controller.Calculate(resultLoop.GetPitch(), 1.00);
+        }
+        }
+      if (frc::DriverStation::GetAlliance() == frc::DriverStation::kRed) {
+                if (frc::DriverStation::GetAlliance() == frc::DriverStation::kBlue) {
+
+        
+        if (resultLoop.GetFiducialId() == goal ) {
+                rotationSpeed = -controller.Calculate(resultLoop.GetPitch(), 1.00);
+        }
+      }
+      }
+     units::length::meter_t range = photonlib::PhotonUtils::CalculateDistanceToTarget(
+          1.3462_m, .36_m, 0_rad,
+          units::degree_t{resultLoop.GetPitch()}
+     );
+units::meter_t rangeMeter = .03_m;
+      // Use this range as the measurement we give to the PID controller.
+      forwardSpeed = -controller.Calculate(range.value(), rangeMeter.value());
+   } }} else {
       // If we have no targets, stay still.
       rotationSpeed = 0;
+      forwardSpeed = 0;
     }
-    drivetrain.DriveDistance(0.0,rotationSpeed);
-}
+    drivetrain.DriveDistance(forwardSpeed,rotationSpeed);
+  } if (iteration >= 1400) {
+    
+    pneumaticarm->ExtendArm();
+
+    
+  }
+  if (iteration >=3800) {
+    
+    drivetrain.DriveDistance(0,0);
+    grabbah->UnGrab();
+    pneumaticarm->Closer();
+
+  }
+  if (iteration >= 7400) {
+    drivetrain.DriveDistance(-1,0);
+    pneumaticarm->RetractArm();
+  }
+  if (iteration >= 8300) {
+drivetrain.DriveDistance(0,0);
+  }
+   }
+
 
 void Robot::TeleopInit() {
   // This makes sure that the autonomous stops running when

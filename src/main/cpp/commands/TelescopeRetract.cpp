@@ -14,7 +14,7 @@
 
 #include "commands/TelescopeRetract.h"
 
-TelescopeRetract::TelescopeRetract(PneumaticsModular* telescopearm)
+TelescopeRetract::TelescopeRetract(PneumaticsArm* telescopearm)
 :telescopearm(telescopearm){
 
     // Use AddRequirements() here to declare subsystem dependencies
@@ -33,7 +33,7 @@ void TelescopeRetract::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void TelescopeRetract::Execute() {
-telescopearm->ValveClose(1);
+telescopearm->RetractArm();
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -43,7 +43,7 @@ bool TelescopeRetract::IsFinished() {
 
 // Called once after isFinished returns true
 void TelescopeRetract::End(bool interrupted) {
-telescopearm -> ValveCloseAll(1);
+telescopearm -> Closer();
 }
 
 bool TelescopeRetract::RunsWhenDisabled() const {

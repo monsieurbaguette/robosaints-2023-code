@@ -14,7 +14,7 @@
 
 #include "commands/ElevatorDown.h"
 #include <frc/Joystick.h>
-ElevatorDown::ElevatorDown(Elevator* m_elevator, PneumaticsModular* telescopearm, bool arm)
+ElevatorDown::ElevatorDown(Elevator* m_elevator, PneumaticsArm* telescopearm, bool arm)
 :m_elevator(m_elevator), telescopearm(telescopearm){
 
     // Use AddRequirements() here to declare subsystem dependencies
@@ -55,7 +55,7 @@ bool ElevatorDown::IsFinished() {
 // Called once after isFinished returns true
 void ElevatorDown::End(bool interrupted) {
 m_elevator->ElevatorStop();
-telescopearm -> ValveCloseAll(1);
+
 }
 
 bool ElevatorDown::RunsWhenDisabled() const {

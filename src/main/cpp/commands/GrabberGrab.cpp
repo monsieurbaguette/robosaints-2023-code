@@ -14,7 +14,7 @@
 
 #include "commands/GrabberGrab.h"
 
-GrabberGrab::GrabberGrab(PneumaticsModular* grabber)
+GrabberGrab::GrabberGrab(PneumaticsGrabber* grabber)
 :grabber(grabber){
 
     // Use AddRequirements() here to declare subsystem dependencies
@@ -33,7 +33,7 @@ void GrabberGrab::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void GrabberGrab::Execute() {
-grabber->ValveOpen(2);
+grabber->UnGrab();
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -43,7 +43,7 @@ bool GrabberGrab::IsFinished() {
 
 // Called once after isFinished returns true
 void GrabberGrab::End(bool interrupted) {
-grabber -> ValveClose(2);
+grabber -> Grab();
 }
 
 bool GrabberGrab::RunsWhenDisabled() const {

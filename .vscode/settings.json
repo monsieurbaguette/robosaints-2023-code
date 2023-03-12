@@ -89,5 +89,6 @@
     "typeinfo": "cpp",
     "variant": "cpp",
     "xlocale": "cpp"
-  }
+  },
+  "C_Cpp.errorSquiggles": "enabled"
 }

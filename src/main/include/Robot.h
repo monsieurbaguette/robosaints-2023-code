@@ -17,7 +17,8 @@
 #include <frc/controller/PIDController.h>
 #include "OI.h"
 #include "subsystems/DrivetrainModular.h"
-
+#include <units/angle.h>
+#include <units/length.h>
 class Robot : public frc::TimedRobot {
  public:
  photonlib::PhotonCamera camera{"photonvision"};
@@ -33,10 +34,14 @@ class Robot : public frc::TimedRobot {
   void TeleopInit() override;
   void TeleopPeriodic() override;
   void TestPeriodic() override;
-
+  PneumaticsArm* pneumaticarm;
+  PneumaticsGrabber* grabbah;
  private:  
    OI* controlInterface;
    DrivetrainModular drivetrain;
+   
+    double forwardSpeed;
+    double rotationSpeed;
   // Have it null by default so that if testing teleop it
   // doesn't have undefined behavior and potentially crash.
   frc2::Command* m_autonomousCommand = nullptr;

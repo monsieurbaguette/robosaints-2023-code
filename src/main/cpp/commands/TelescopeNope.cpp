@@ -14,7 +14,7 @@
 
 #include "commands/TelescopeNope.h"
 
-TelescopeNope::TelescopeNope(PneumaticsModular* telescopearm)
+TelescopeNope::TelescopeNope(PneumaticsArm* telescopearm)
 :telescopearm(telescopearm){
 
     // Use AddRequirements() here to declare subsystem dependencies
@@ -33,7 +33,7 @@ void TelescopeNope::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void TelescopeNope::Execute() {
-telescopearm->ValveCloseAll(1);
+telescopearm->Closer();
 }
 
 // Make this return true when this Command no longer needs to run execute()

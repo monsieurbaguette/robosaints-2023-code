@@ -14,7 +14,7 @@
 
 #include "commands/TelescopeExtend.h"
 
-TelescopeExtend::TelescopeExtend(PneumaticsModular* telescopearm)
+TelescopeExtend::TelescopeExtend(PneumaticsArm* telescopearm)
 :telescopearm(telescopearm){
 
     // Use AddRequirements() here to declare subsystem dependencies
@@ -33,7 +33,7 @@ void TelescopeExtend::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void TelescopeExtend::Execute() {
-telescopearm->ValveOpen(1);
+telescopearm->ExtendArm();
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -44,7 +44,7 @@ bool TelescopeExtend::IsFinished() {
 
 // Called once after isFinished returns true
 void TelescopeExtend::End(bool interrupted) {
-telescopearm -> ValveCloseAll(1);
+telescopearm -> Closer();
 }
 
 bool TelescopeExtend::RunsWhenDisabled() const {
